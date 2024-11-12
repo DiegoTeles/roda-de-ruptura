@@ -5,25 +5,28 @@ const CenteredContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 20px; 
-  box-sizing: border-box; 
+  padding: 0 20px;
+  box-sizing: border-box;
 `;
 
 const ContentWrapper = styled.div`
   width: 100%;
-  max-width: 1200px; 
-  padding: 20px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  padding: 20px;
+  padding-top: 80px; /* Adiciona um espaçamento no topo para evitar sobreposição */
+  box-sizing: border-box;
 `;
 
 const CenteredLayout = ({ children }) => {
   return (
-    <CenteredContainer>
-      <ContentWrapper>
-        <Navbar />
-        {children}
-      </ContentWrapper>
-    </CenteredContainer>
+    <>
+      <Navbar />
+      <CenteredContainer>
+        <ContentWrapper>
+          {children}
+        </ContentWrapper>
+      </CenteredContainer>
+    </>
   );
 };
 

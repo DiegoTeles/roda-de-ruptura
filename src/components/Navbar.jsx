@@ -7,7 +7,12 @@ const NavbarContainer = styled.nav`
   width: 100%;
   padding: 10px 20px;
   background-color: transparent;
-  position: relative;
+  position: fixed; /* Fixa a navbar no topo */
+  top: 0; /* Garante que a navbar fique no topo da página */
+  left: 0;
+  z-index: 1000; /* Garante que a navbar fique acima de outros elementos */
+  background-color: white; /* Adiciona um fundo branco para a navbar */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra para destacar a navbar */
 `;
 
 const NavbarContent = styled.div`
@@ -25,7 +30,6 @@ const Logo = styled.div`
 `;
 
 const HamburgerIcon = styled.div`
-  display: none;
   font-size: 24px;
   cursor: pointer;
 
@@ -35,31 +39,25 @@ const HamburgerIcon = styled.div`
 `;
 
 const NavLinks = styled.ul`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  background-color: white;
   list-style: none;
-  padding: 0;
+  padding: 20px;
   margin: 0;
-
-  @media (max-width: 768px) {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px;
-    margin: 0;
-    display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')}; /* Controla a exibição do menu */
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinha os itens à esquerda */
+  gap: 15px;
+  transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(100%)')}; /* Transição do menu */
+  transition: transform 0.3s ease-in-out; /* Transição suave */
+  z-index: 1001; /* Garante que o menu fique acima do overlay */
 `;
 
 const NavLink = styled.li`
-  position: relative; /* Necessário para o dropdown */
-  
   a {
     text-decoration: none;
     color: black;
@@ -112,6 +110,17 @@ const DropdownLink = styled(NavLink)`
   }
 `;
 
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo preto transparente */
+  z-index: 1000; /* Fica abaixo do menu, mas acima do conteúdo */
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')}; /* Exibe o overlay quando o menu está aberto */
+`;
+
 const Navbar = () => {
   const location = useLocation(); // Hook para obter a URL atual
   const [isOpen, setIsOpen] = useState(false); // Estado para controlar o menu hamburger
@@ -121,39 +130,42 @@ const Navbar = () => {
   };
 
   return (
-    <NavbarContainer>
-      <NavbarContent>
-        <Logo>Ruptura</Logo>
-        <HamburgerIcon onClick={toggleMenu}>
-          {isOpen ? <FaTimes /> : <FaBars />} {/* Alterna entre ícone de abrir e fechar */}
-        </HamburgerIcon>
-        <NavLinks isOpen={isOpen}>
-          <NavLink>
-            <a href='/' className={location.pathname === '/' ? 'active' : ''}> Home </a>
-          </NavLink>
-          <NavLink>
-            <a href='/leis-direitos' className={location.pathname === '/leis-direitos' ? 'active' : ''} > A lei e seus Direitos </a>
-          </NavLink>
-          <NavLink>
-            <a href='/historia' className={location.pathname === '/historia' ? 'active' : ''} > História Maria da Penha </a>
-          </NavLink>
-          <NavLink>
-            <a href='/artigos' className={location.pathname === '/artigos' ? 'active' : ''} > Artigos </a>
-          </NavLink>
-          <NavLink>
-            <a href='/contatos' className={location.pathname === '/contatos' ? 'active' : ''} > Contatos de apoio </a>
-          </NavLink>
-          <DropdownLink>
-            <a href='#' className={location.pathname === '/conteudos-adicionais' ? 'active' : ''} > Conteúdos adicionais </a>
-            <DropdownContent>
-              <li>
-                <a href='/podcast'>Podcast</a>
-              </li>
-            </DropdownContent>
-          </DropdownLink>
-        </NavLinks>
-      </NavbarContent>
-    </NavbarContainer>
+    <>
+      <NavbarContainer>
+        <NavbarContent>
+          <Logo>Ruptura</Logo>
+          <HamburgerIcon onClick={toggleMenu}>
+            {isOpen ? <FaTimes /> : <FaBars />} {/* Alterna entre ícone de abrir e fechar */}
+          </HamburgerIcon>
+        </NavbarContent>
+      </NavbarContainer>
+      <NavLinks isOpen={isOpen}>
+        <NavLink>
+          <a href='/' className={location.pathname === '/' ? 'active' : ''}> Home </a>
+        </NavLink>
+        <NavLink>
+          <a href='/leis-direitos' className={location.pathname === '/leis-direitos' ? 'active' : ''} > A lei e seus Direitos </a>
+        </NavLink>
+        <NavLink>
+          <a href='/historia' className={location.pathname === '/historia' ? 'active' : ''} > História Maria da Penha </a>
+        </NavLink>
+        <NavLink>
+          <a href='/artigos' className={location.pathname === '/artigos' ? 'active' : ''} > Artigos </a>
+        </NavLink>
+        <NavLink>
+          <a href='/contatos' className={location.pathname === '/contatos' ? 'active' : ''} > Contatos de apoio </a>
+        </NavLink>
+        <DropdownLink>
+          <a href='#' className={location.pathname === '/conteudos-adicionais' ? 'active' : ''} > Conteúdos adicionais </a>
+          <DropdownContent>
+            <li>
+              <a href='/podcast'>Podcast</a>
+            </li>
+          </DropdownContent>
+        </DropdownLink>
+      </NavLinks>
+      <Overlay isOpen={isOpen} onClick={toggleMenu} /> {/* Overlay que cobre o conteúdo */}
+    </>
   );
 };
 

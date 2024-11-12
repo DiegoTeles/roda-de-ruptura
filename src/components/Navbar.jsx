@@ -106,12 +106,6 @@ const DropdownContent = styled.ul`
   }
 `;
 
-const DropdownLink = styled(NavLink)`
-  &:hover ${DropdownContent} {
-    display: block; /* Exibe o dropdown ao passar o mouse */
-  }
-`;
-
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -145,12 +139,13 @@ const Navbar = () => {
     <>
       <NavbarContainer>
         <NavbarContent>
-          <Logo>
-            <Link to='/'>Ruptura</Link>
-          </Logo>
+        <Logo>
+          <Link to='/'>
+            <img src="/src/assets/ruptura.png" alt="Ruptura Logo" style={{ height: '50px' }} />
+          </Link>
+        </Logo>
           <HamburgerIcon onClick={toggleMenu}>
             {isOpen ? <FaTimes /> : <FaBars />}{' '}
-            {/* Alterna entre ícone de abrir e fechar */}
           </HamburgerIcon>
         </NavbarContent>
       </NavbarContainer>

@@ -1,0 +1,46 @@
+/* Container principal em forma de círculo */
+.circle-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    overflow: hidden;
+  }
+  
+  /* Estilos das colunas */
+  .column {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background-color: rgba(0, 150, 255, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: white;
+    font-weight: bold;
+    transform-origin: bottom center;
+  }
+  
+  /* Rotaciona cada coluna para posicioná-las em 4 quadrantes */
+  .column-1 {
+    transform: rotate(0deg) translateY(-50%);
+    background-color: rgba(0, 150, 255, 0.6);
+  }
+  .column-2 {
+    transform: rotate(90deg) translateY(-50%);
+    background-color: rgba(0, 200, 150, 0.6);
+  }
+  .column-3 {
+    transform: rotate(180deg) translateY(-50%);
+    background-color: rgba(255, 150, 0, 0.6);
+  }
+  .column-4 {
+    transform: rotate(270deg) translateY(-50%);
+    background-color: rgba(200, 0, 150, 0.6);
+  }
+  

@@ -204,10 +204,10 @@ export default function ResultsPage() {
     <div style={{ maxWidth: '100%', margin: 'auto', padding: '20px' }}>
       <AlertBox>
         <AiOutlineExclamationCircle size={24} style={{ marginRight: '10px' }} />
-        Este teste é apenas um guia inicial. Para uma avaliação completa e o
-        suporte necessário, é essencial procurar um profissional de saúde
-        mental, que pode oferecer a ajuda adequada para o que você está
-        passando.
+        Este teste é apenas um guia inicial. <br />
+        Para uma avaliação completa e o suporte necessário, é essencial procurar
+        um profissional de saúde mental, que pode oferecer a ajuda adequada para
+        o que você está passando.
       </AlertBox>
       <h1 style={{ textAlign: 'center' }}>Resultados da avaliação</h1>
       {/* Gráfico */}

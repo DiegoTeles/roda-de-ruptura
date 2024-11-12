@@ -68,7 +68,6 @@ export default function ResultsPage() {
     Array(labels.length).fill(null)
   );
   const [openModal, setOpenModal] = useState(false);
-  const [legendPosition, setLegendPosition] = useState('right'); // Estado para controlar a posição da legenda
 
   useEffect(() => {
     const savedResponses = JSON.parse(localStorage.getItem('responses')) || [];
@@ -76,26 +75,6 @@ export default function ResultsPage() {
       setOpenModal(true);
     }
     setResponses(savedResponses);
-
-    // Função para ajustar a posição da legenda com base no tamanho da tela
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setLegendPosition('bottom'); // Legenda abaixo do gráfico em telas menores
-      } else {
-        setLegendPosition('right'); // Legenda na lateral em telas maiores
-      }
-    };
-
-    // Adicionar o event listener para redimensionamento da tela
-    window.addEventListener('resize', handleResize);
-
-    // Chamar a função uma vez para definir a posição inicial
-    handleResize();
-
-    // Limpar o event listener ao desmontar o componente
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
   }, []);
 
   const handleNext = () => {
@@ -160,19 +139,7 @@ export default function ResultsPage() {
   const options = {
     plugins: {
       legend: {
-        display: true,
-        position: legendPosition, // Posição da legenda controlada pelo estado
-        align: 'end',
-        labels: {
-          boxWidth: 20,
-          padding: 20,
-        },
-        maxWidth: 200,
-        maxHeight: 400,
-        title: {
-          display: true,
-          text: 'Categorias',
-        },
+        display: false, // Desativar a legenda no gráfico
       },
     },
     layout: {
@@ -184,15 +151,50 @@ export default function ResultsPage() {
       },
     },
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: false, // Permitir que o gráfico se ajuste ao container
   };
+
+  // Componente separado para a legenda
+  const LegendComponent = () => (
+    <div style={{ marginTop: '20px' }}>
+      <h3>Legenda</h3>
+      <ul style={{ listStyleType: 'none', padding: 0 }}>
+        {labels.map((label, index) => (
+          <li key={index} style={{ marginBottom: '10px' }}>
+            <span
+              style={{
+                display: 'inline-block',
+                width: '20px',
+                height: '20px',
+                backgroundColor: data.datasets[0].backgroundColor[index],
+                marginRight: '10px',
+              }}
+            ></span>
+            {label}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 
   return (
     <div style={{ maxWidth: '100%', margin: 'auto', padding: '20px' }}>
       <h1 style={{ textAlign: 'center' }}>Resultados da avaliação</h1>
-      <div style={{ height: '50vh', width: '100%' }}>
+
+      {/* Gráfico */}
+      <div
+        style={{
+          height: '50vh',
+          width: '100%',
+          maxWidth: '600px', // Limitar a largura máxima em telas grandes
+          margin: 'auto',
+        }}
+      >
         <PolarArea data={data} options={options} />
       </div>
+
+      {/* Legenda separada */}
+      <LegendComponent />
 
       <Dialog open={openModal} disableEscapeKeyDown fullWidth maxWidth="sm">
         <DialogTitle>Vamos primeiro fazer uma avaliação:</DialogTitle>
@@ -274,6 +276,15 @@ export default function ResultsPage() {
           />
         </DialogActions>
       </Dialog>
+
+      {/* Media query para ajustar o layout no mobile */}
+      <style jsx>{`
+        @media (max-width: 768px) {
+          div[style*='height: 50vh'] {
+            height: 40vh; // Ajustar a altura do gráfico em telas menores
+          }
+        }
+      `}</style>
     </div>
   );
 }

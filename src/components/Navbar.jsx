@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Ícones de menu hamburger e fechar
+import rupturaLogo from '/src/assets/ruptura.png';
 
 const NavbarContainer = styled.nav`
   width: 100%;
@@ -141,7 +142,7 @@ const Navbar = () => {
         <NavbarContent>
         <Logo>
           <Link to='/'>
-            <img src="/src/assets/ruptura.png" alt="Ruptura Logo" style={{ height: '50px' }} />
+          <img src={rupturaLogo} alt="Ruptura Logo" style={{ height: '50px' }} />
           </Link>
         </Logo>
           <HamburgerIcon onClick={toggleMenu}>

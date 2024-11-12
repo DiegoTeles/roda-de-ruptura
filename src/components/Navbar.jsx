@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Ícones de menu hamburger e fechar
 
@@ -53,7 +53,8 @@ const NavLinks = styled.ul`
   flex-direction: column;
   align-items: flex-start; /* Alinha os itens à esquerda */
   gap: 15px;
-  transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(100%)')}; /* Transição do menu */
+  transform: ${({ isOpen }) =>
+    isOpen ? 'translateX(0)' : 'translateX(100%)'}; /* Transição do menu */
   transition: transform 0.3s ease-in-out; /* Transição suave */
   z-index: 1001; /* Garante que o menu fique acima do overlay */
 `;
@@ -119,7 +120,8 @@ const Overlay = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Fundo preto transparente */
   z-index: 1000; /* Fica abaixo do menu, mas acima do conteúdo */
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')}; /* Exibe o overlay quando o menu está aberto */
+  display: ${({ isOpen }) =>
+    isOpen ? 'block' : 'none'}; /* Exibe o overlay quando o menu está aberto */
 `;
 
 const Navbar = () => {
@@ -134,30 +136,68 @@ const Navbar = () => {
     <>
       <NavbarContainer>
         <NavbarContent>
-          <Logo>Ruptura</Logo>
+          <Logo>
+            <Link to='/'>Ruptura</Link>
+          </Logo>
           <HamburgerIcon onClick={toggleMenu}>
-            {isOpen ? <FaTimes /> : <FaBars />} {/* Alterna entre ícone de abrir e fechar */}
+            {isOpen ? <FaTimes /> : <FaBars />}{' '}
+            {/* Alterna entre ícone de abrir e fechar */}
           </HamburgerIcon>
         </NavbarContent>
       </NavbarContainer>
       <NavLinks isOpen={isOpen}>
         <NavLink>
-          <a href='/' className={location.pathname === '/' ? 'active' : ''}> Home </a>
+          <a href='/' className={location.pathname === '/' ? 'active' : ''}>
+            {' '}
+            Home{' '}
+          </a>
         </NavLink>
         <NavLink>
-          <a href='/leis-direitos' className={location.pathname === '/leis-direitos' ? 'active' : ''} > A lei e seus Direitos </a>
+          <a
+            href='/leis-direitos'
+            className={location.pathname === '/leis-direitos' ? 'active' : ''}
+          >
+            {' '}
+            A lei e seus Direitos{' '}
+          </a>
         </NavLink>
         <NavLink>
-          <a href='/historia' className={location.pathname === '/historia' ? 'active' : ''} > História Maria da Penha </a>
+          <a
+            href='/historia'
+            className={location.pathname === '/historia' ? 'active' : ''}
+          >
+            {' '}
+            História Maria da Penha{' '}
+          </a>
         </NavLink>
         <NavLink>
-          <a href='/artigos' className={location.pathname === '/artigos' ? 'active' : ''} > Artigos </a>
+          <a
+            href='/artigos'
+            className={location.pathname === '/artigos' ? 'active' : ''}
+          >
+            {' '}
+            Artigos{' '}
+          </a>
         </NavLink>
         <NavLink>
-          <a href='/contatos' className={location.pathname === '/contatos' ? 'active' : ''} > Contatos de apoio </a>
+          <a
+            href='/contatos'
+            className={location.pathname === '/contatos' ? 'active' : ''}
+          >
+            {' '}
+            Contatos de apoio{' '}
+          </a>
         </NavLink>
         <DropdownLink>
-          <a href='#' className={location.pathname === '/conteudos-adicionais' ? 'active' : ''} > Conteúdos adicionais </a>
+          <a
+            href='#'
+            className={
+              location.pathname === '/conteudos-adicionais' ? 'active' : ''
+            }
+          >
+            {' '}
+            Conteúdos adicionais{' '}
+          </a>
           <DropdownContent>
             <li>
               <a href='/podcast'>Podcast</a>
@@ -165,7 +205,8 @@ const Navbar = () => {
           </DropdownContent>
         </DropdownLink>
       </NavLinks>
-      <Overlay isOpen={isOpen} onClick={toggleMenu} /> {/* Overlay que cobre o conteúdo */}
+      <Overlay isOpen={isOpen} onClick={toggleMenu} />{' '}
+      {/* Overlay que cobre o conteúdo */}
     </>
   );
 };

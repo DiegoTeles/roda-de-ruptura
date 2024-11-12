@@ -57,6 +57,7 @@ const TextSection = styled.div`
   color: #333;
 `;
 const AlertBox = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,6 +69,16 @@ const AlertBox = styled.div`
   font-size: 1rem;
   text-align: center;
   line-height: 1.5;
+
+  svg {
+    margin-right: 10px;
+    position: absolute;
+    top: -13px;
+    left: -7px;
+    background: #fff3cd;
+    padding: 3px;
+    border-radius: 100%;
+  }
 `;
 const labels = [
   'Saúde e disposição',

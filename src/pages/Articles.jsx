@@ -29,7 +29,7 @@ const RedirectIcon = styled(FaExternalLinkAlt)`
   position: absolute;
   top: 10px;
   right: 10px;
-  color: #FFF;
+  color: #fff;
   font-size: 18px;
   opacity: 0.7;
 `;
@@ -59,7 +59,7 @@ const CardDescription = styled.p`
 const CardLink = styled.button`
   background: none;
   border: none;
-  color: #007BFF;
+  color: #007bff;
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
@@ -111,45 +111,54 @@ const Articles = () => {
 
   const articles = [
     {
-      title: 'Violência contra a Mulher: Problematizando Definições Teóricas, Filosóficas e Jurídicas',
-      description: 'Este artigo aborda as definições teóricas, filosóficas e jurídicas sobre a violência contra a mulher.',
+      title:
+        'Violência contra a Mulher: Problematizando Definições Teóricas, Filosóficas e Jurídicas',
+      description:
+        'Este artigo aborda as definições teóricas, filosóficas e jurídicas sobre a violência contra a mulher.',
       link: 'https://www.scielo.br/j/psoc/a/Dr7bvbkMvcYSTwdHDpdYhfn',
-      image: 'https://via.placeholder.com/300x180',
+      image: 'https://placehold.co/300x180?text=Artigo+01',
       showModal: true, // Exibe no modal
     },
     {
-      title: 'Violência contra mulher: Concepções e Práticas de Profissionais de Serviços Públicos',
-      description: 'Este estudo explora as concepções e práticas de profissionais de serviços públicos em relação à violência contra a mulher.',
+      title:
+        'Violência contra mulher: Concepções e Práticas de Profissionais de Serviços Públicos',
+      description:
+        'Este estudo explora as concepções e práticas de profissionais de serviços públicos em relação à violência contra a mulher.',
       link: 'https://pepsic.bvsalud.org/scielo.php?script=sci_arttext&pid=S2236-64072018000200003',
-      image: 'https://via.placeholder.com/300x180',
+      image: 'https://placehold.co/300x180?text=Artigo+02',
       showModal: true, // Exibe no modal
     },
     {
       title: 'A Violência Contra a Mulher',
-      description: 'Uma análise sobre a violência contra a mulher e suas implicações sociais e jurídicas.',
+      description:
+        'Uma análise sobre a violência contra a mulher e suas implicações sociais e jurídicas.',
       link: 'https://periodicorease.pro.br/rease/article/view/12710',
-      image: 'https://via.placeholder.com/300x180',
+      image: 'https://placehold.co/300x180?text=Artigo+03',
       showModal: true, // Exibe no modal
     },
     {
       title: 'A Magnitude Invisível da Violência Contra a Mulher',
-      description: 'Este artigo discute a magnitude invisível da violência contra a mulher e suas consequências.',
+      description:
+        'Este artigo discute a magnitude invisível da violência contra a mulher e suas consequências.',
       link: 'http://scielo.iec.gov.br/scielo.php?script=sci_arttext&pid=S1679-49742016000300451',
-      image: 'https://via.placeholder.com/300x180',
+      image: 'https://placehold.co/300x180?text=Artigo+04',
       showModal: false, // Redireciona para nova aba
     },
     {
-      title: 'Gênero e Violência Contra a Mulher: O Perigoso Jogo de Poder e Dominação',
-      description: 'Uma análise sobre o papel do gênero na violência contra a mulher e o jogo de poder envolvido.',
+      title:
+        'Gênero e Violência Contra a Mulher: O Perigoso Jogo de Poder e Dominação',
+      description:
+        'Uma análise sobre o papel do gênero na violência contra a mulher e o jogo de poder envolvido.',
       link: 'https://pepsic.bvsalud.org/scielo.php?script=sci_arttext&pid=S1870-350X2008000300012',
-      image: 'https://via.placeholder.com/300x180',
+      image: 'https://placehold.co/300x180?text=Artigo+05',
       showModal: true, // Exibe no modal
     },
     {
       title: 'Judiciário pela Eliminação da Violência Contra a Mulher',
-      description: 'Este artigo discute o papel do judiciário na eliminação da violência contra a mulher.',
+      description:
+        'Este artigo discute o papel do judiciário na eliminação da violência contra a mulher.',
       link: 'https://www.cnj.jus.br/artigo-judiciario-pela-eliminacao-da-violencia-contra-a-mulher/',
-      image: 'https://via.placeholder.com/300x180',
+      image: 'https://placehold.co/300x180?text=Artigo+06',
       showModal: true, // Exibe no modal
     },
   ];
@@ -161,7 +170,8 @@ const Articles = () => {
         {articles.map((article, index) => (
           <Card key={index}>
             <CardImage src={article.image} alt={`Artigo ${index + 1}`} />
-            {!article.showModal && <RedirectIcon />} {/* Exibe o ícone de redirecionamento se não for modal */}
+            {!article.showModal && <RedirectIcon />}{' '}
+            {/* Exibe o ícone de redirecionamento se não for modal */}
             <CardContent>
               <CardTitle>
                 <CardLink onClick={() => handleArticleClick(article)}>
@@ -174,7 +184,12 @@ const Articles = () => {
         ))}
       </Container>
 
-      <Modal isOpen={isModalOpen} title={selectedArticleTitle} onClose={closeModal} articleLink={selectedArticleLink} />
+      <Modal
+        isOpen={isModalOpen}
+        title={selectedArticleTitle}
+        onClose={closeModal}
+        articleLink={selectedArticleLink}
+      />
     </>
   );
 };

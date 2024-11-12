@@ -31,6 +31,7 @@ const Logo = styled.div`
 
 const HamburgerIcon = styled.div`
   font-size: 24px;
+  margin-right: 30px;
   cursor: pointer;
 
   @media (max-width: 768px) {

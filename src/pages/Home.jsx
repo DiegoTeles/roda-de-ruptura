@@ -74,7 +74,7 @@ const Home = () => {
       <HeroSection>
         <Container>
           <Typography variant='h2' gutterBottom>
-            Bem-vinda ao Roda de Ruptura
+            Bem-vinda ao Roda da Ruptura
           </Typography>
           <Typography variant='h6' paragraph>
             Um espaço seguro para informação, apoio e reflexão. Juntas, somos

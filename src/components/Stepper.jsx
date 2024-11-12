@@ -6,12 +6,14 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { Card, CardContent, Typography, Grid, Grid2 } from '@mui/material';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const StyledIconButton = styled.button`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: ${(props) => (props.selected ? props.theme.palette.primary.main : '#e0e0e0')};
+  background-color: ${(props) =>
+    props.selected ? props.theme.palette.primary.main : '#e0e0e0'};
   color: ${(props) => (props.selected ? 'white' : 'black')};
   font-size: 0.75rem;
   display: flex;
@@ -19,9 +21,9 @@ const StyledIconButton = styled.button`
   justify-content: center;
   border: none;
   cursor: pointer;
-
   &:hover {
-    background-color: ${(props) => (props.selected ? props.theme.palette.primary.dark : '#bdbdbd')};
+    background-color: ${(props) =>
+      props.selected ? props.theme.palette.primary.dark : '#bdbdbd'};
   }
 `;
 
@@ -36,13 +38,14 @@ const values = [
   'Vida social',
   'Hobbies & Diversão',
   'Plenitude & Felicidade',
-  'Espiritualidade'
+  'Espiritualidade',
 ];
 
-export default function DotsMobileStepper() {
+export default function DotsMobileStepper({ handleClose }) {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [responses, setResponses] = React.useState(Array(values.length).fill(null)); 
+  const [responses, setResponses] = React.useState(Array(values.length).fill(null));
+  const navigate = useNavigate(); 
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -60,6 +63,8 @@ export default function DotsMobileStepper() {
 
   const handleSave = () => {
     localStorage.setItem('responses', JSON.stringify(responses));
+    handleClose();
+    navigate('/results'); 
   };
 
   return (
@@ -100,7 +105,11 @@ export default function DotsMobileStepper() {
               Salvar
             </Button>
           ) : (
-            <Button size="small" onClick={handleNext} disabled={responses[activeStep] === null}>
+            <Button
+              size="small"
+              onClick={handleNext}
+              disabled={responses[activeStep] === null}
+            >
               Próximo
               {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
             </Button>

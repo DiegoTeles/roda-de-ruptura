@@ -91,7 +91,7 @@ const Home = () => {
           <Typography variant='h6' gutterBottom>
             Avaliação de Saúde Emocional
           </Typography>
-          <StepperAvaliation />
+          <StepperAvaliation handleClose={handleClose}  />
         </Box>
       </Modal>
 

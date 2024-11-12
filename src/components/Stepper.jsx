@@ -31,7 +31,6 @@ const values = [
   'Equilíbrio emocional',
   'Realização & Propósito',
   'Recursos financeiros',
-  'Contribuição social',
   'Família',
   'Relacionamento amoroso',
   'Vida social',
@@ -61,7 +60,6 @@ export default function DotsMobileStepper() {
 
   const handleSave = () => {
     localStorage.setItem('responses', JSON.stringify(responses));
-    alert('Respostas salvas no localStorage!');
   };
 
   return (

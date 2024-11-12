@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Ícones de menu hamburger e fechar
@@ -127,10 +127,19 @@ const Overlay = styled.div`
 const Navbar = () => {
   const location = useLocation(); // Hook para obter a URL atual
   const [isOpen, setIsOpen] = useState(false); // Estado para controlar o menu hamburger
+  const [showResultsMenu, setShowResultsMenu] = useState(false); // Estado para controlar a exibição do menu "Resultado da avaliação"
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    // Verifica o localStorage para ver se há respostas salvas
+    const savedResponses = JSON.parse(localStorage.getItem('responses')) || [];
+    if (savedResponses.length > 0) {
+      setShowResultsMenu(true); // Exibe o menu se houver respostas
+    }
+  }, []);
 
   return (
     <>
@@ -188,7 +197,16 @@ const Navbar = () => {
             Contatos de apoio{' '}
           </a>
         </NavLink>
-        <DropdownLink>
+        <NavLink>
+          <a
+            href='/podcast'
+            className={location.pathname === '/podcast' ? 'active' : ''}
+          >
+            {' '}
+            Podcast{' '}
+          </a>
+        </NavLink>
+        {/*   <DropdownLink>
           <a
             href='#'
             className={
@@ -204,9 +222,21 @@ const Navbar = () => {
             </li>
           </DropdownContent>
         </DropdownLink>
+           */}
+        {/* Condicionalmente renderiza o menu "Resultado da avaliação" */}
+        {showResultsMenu && (
+          <NavLink>
+            <a
+              href='/results'
+              className={location.pathname === '/results' ? 'active' : ''}
+            >
+              {' '}
+              Resultado da avaliação{' '}
+            </a>
+          </NavLink>
+        )}
       </NavLinks>
       <Overlay isOpen={isOpen} onClick={toggleMenu} />{' '}
-      {/* Overlay que cobre o conteúdo */}
     </>
   );
 };

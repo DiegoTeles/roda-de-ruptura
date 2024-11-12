@@ -9,6 +9,7 @@ import Articles from './pages/Articles.jsx';
 import Contacts from './pages/Contacts.jsx';
 import Podcast from './pages/Podcast.jsx';
 import CenteredLayout from './template/CenteredLayout.jsx';
+import ResultsPage from './pages/Results.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')).render(
           <Route path='artigos' element={<Articles />} />
           <Route path='contatos' element={<Contacts />} />
           <Route path='podcast' element={<Podcast />} />
+          <Route path='results' element={<ResultsPage />} />
         </Routes>
       </CenteredLayout>
     </BrowserRouter>

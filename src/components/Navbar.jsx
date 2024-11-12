@@ -1,18 +1,37 @@
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { FaBars, FaTimes } from 'react-icons/fa'; // Ícones de menu hamburger e fechar
 
 const NavbarContainer = styled.nav`
   width: 100%;
   padding: 10px 20px;
   background-color: transparent;
+  position: relative;
 `;
 
 const NavbarContent = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+`;
+
+const Logo = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+`;
+
+const HamburgerIcon = styled.div`
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 `;
 
 const NavLinks = styled.ul`
@@ -25,8 +44,16 @@ const NavLinks = styled.ul`
   margin: 0;
 
   @media (max-width: 768px) {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: white;
     flex-direction: column;
     gap: 15px;
+    padding: 20px;
+    margin: 0;
+    display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')}; /* Controla a exibição do menu */
   }
 `;
 
@@ -87,11 +114,20 @@ const DropdownLink = styled(NavLink)`
 
 const Navbar = () => {
   const location = useLocation(); // Hook para obter a URL atual
+  const [isOpen, setIsOpen] = useState(false); // Estado para controlar o menu hamburger
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <NavbarContainer>
       <NavbarContent>
-        <NavLinks>
+        <Logo>Ruptura</Logo>
+        <HamburgerIcon onClick={toggleMenu}>
+          {isOpen ? <FaTimes /> : <FaBars />} {/* Alterna entre ícone de abrir e fechar */}
+        </HamburgerIcon>
+        <NavLinks isOpen={isOpen}>
           <NavLink>
             <a href='/' className={location.pathname === '/' ? 'active' : ''}> Home </a>
           </NavLink>
